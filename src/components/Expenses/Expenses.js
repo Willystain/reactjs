@@ -18,7 +18,7 @@ const Expenses = (props) => {
         if (year === 'all') {
             return expense;
         } else {
-            return expense.date.toLocaleDateString('en-us', { year: "numeric" }) === year;
+            return expense.date.getFullYear().toString() === year;
         }
 
     })
@@ -28,8 +28,8 @@ const Expenses = (props) => {
         <div>
             <Card className="expenses">
                 <ExpensesFilter select={year} onSelect={handleYear} />
-
-                {filtered.length === 0 ? <p>No expenses found</p> : filtered.map((obj, index) => (
+                {filtered.length === 0 && <p>No expenses found</p>}
+                {filtered.length > 0 && filtered.map((obj, index) => (
                     <ExpenseItem
                         key={obj.id}
                         title={obj.title}
