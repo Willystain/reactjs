@@ -1,5 +1,6 @@
 import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpense.js/NewExpense";
+
 import { useState } from 'react';
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
   return (
     <div>
       <NewExpense onSaved={addExpense}/>
+      
       <Expenses expenseData={expenses}></Expenses>
     
     </div>

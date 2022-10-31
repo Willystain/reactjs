@@ -3,6 +3,7 @@ import Card from "../UI/Card";
 import ExpensesFilter from "./ExpensesFilter";
 import './Expenses.css'
 import { useState } from "react";
+import ExpensesChart from "./ExpensesChart";
 
 const Expenses = (props) => {
 
@@ -19,6 +20,7 @@ const Expenses = (props) => {
             return expense;
         } else {
             return expense.date.getFullYear().toString() === year;
+
         }
 
     })
@@ -28,18 +30,18 @@ const Expenses = (props) => {
         <div>
             <Card className="expenses">
                 <ExpensesFilter select={year} onSelect={handleYear} />
+                <ExpensesChart expenseChartData = {filtered}/>
                 {filtered.length === 0 && <p>No expenses found</p>}
                 {filtered.length > 0 && filtered.map((obj, index) => (
                     <ExpenseItem
-                        key={obj.id}
+                        key={index}
                         title={obj.title}
                         amount={obj.amount}
                         date={obj.date} />
 
                 ))}
 
-
-
+               
             </Card>
         </div>
     );

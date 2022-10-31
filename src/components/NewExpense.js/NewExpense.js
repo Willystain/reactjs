@@ -2,9 +2,12 @@
 
 import ExpenseForm from './ExpenseForm';
 import './NewExpense.css'
+import { useState } from 'react';
 
 
 function NewExpense(props) {
+
+   const [isEditing, setIsEditing] = useState(false);
     
     function onSaveExpenseData(enteredExpenseData){
         const expenseData = {
@@ -15,9 +18,21 @@ function NewExpense(props) {
         props.onSaved(expenseData);
     }
 
+    const startEditing = () =>{
+    setIsEditing(true)
+  
+    }
+
+    const cancelEditing =()=>{
+      setIsEditing(false)
+    
+    }
+
+
 
     return <div className="new-expense">
-        <ExpenseForm onSaveExpenseData ={onSaveExpenseData}/>
+        {!isEditing && <button  onClick={startEditing}> Expand</button>}
+        {isEditing && <ExpenseForm onCancel={cancelEditing} onSaveExpenseData ={onSaveExpenseData}/>}
     </div>
 
 }
